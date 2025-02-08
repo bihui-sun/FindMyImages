@@ -1,34 +1,48 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import { useGlobalContext } from './context'
 
 const url =
-  'https://api.unsplash.com/search/photos?client_id=api_key&query=office'
+  'https://api.unsplash.com/search/photos?client_id=LT3LlCotzbVNZ6vPZl5aIhGl3TTIX545ucAbw7vG3HI&query='
 
 const Gallery = () => {
+  const { searchTerm } = useGlobalContext()
+  console.log(searchTerm)
   const response = useQuery({
-    queryKey: ['images'],
+    queryKey: ['images', searchTerm],
     queryFn: async () => {
-      const result = await axios.get(url)
-      // console.log(result)
-
-      return result.data
+      const { data } = await axios.get(`${url}+${searchTerm}`)
+      return data
     },
   })
-  console.log(response)
+  // console.log(response)
 
-  if (response.isLoading) return <h1>Loading...</h1>
-  if (response.isError) return <h1>Error</h1>
+  if (response.isLoading)
+    return (
+      <section>
+        <h1>Loading...</h1>
+      </section>
+    )
+  if (response.isError)
+    return (
+      <section>
+        <h1>There was an error...</h1>
+      </section>
+    )
+
+  const images = response.data.results
+  if (images.length < 1)
+    return (
+      <section>
+        <h1>No images found</h1>
+      </section>
+    )
   return (
     <div>
       <h1>Gallery</h1>
-      {response.data.results.map((image) => {
-        return (
-          <img
-            src={image.urls.small}
-            alt={image.alt_description}
-            key={image.id}
-          />
-        )
+      {images.map((image) => {
+        const url = image?.urls?.small
+        return <img src={url} alt={image.alt_description} key={image.id} />
       })}
     </div>
   )
