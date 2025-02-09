@@ -21,3 +21,6 @@ To undate the images after each earch, queryKey is the important factor to be co
 Set a condition when no images found after the search term
 When using api, take care of the condition that couldn't find any urls in the api.
 
+### Themes
+Refactor theme choice based on browser setting
+
