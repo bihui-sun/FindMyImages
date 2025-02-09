@@ -11,13 +11,20 @@ const SearchBar = () => {
     setSearchTerm(searchValue)
   }
   return (
-    <div>
-      <h2>Unsplash image search</h2>
-      <form className="search-bar" onSubmit={handleSubmit}>
-        <input type="text" placeholder="dog" name="search" />
-        <button type="submit">Search</button>
+    <section>
+      <h1 className="title">Unsplash image search</h1>
+      <form className="search-form" onSubmit={handleSubmit}>
+        <input
+          className="form-input"
+          type="text"
+          placeholder="dog"
+          name="search"
+        />
+        <button type="submit" className="btn">
+          Search
+        </button>
       </form>
-    </div>
+    </section>
   )
 }
 

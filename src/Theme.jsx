@@ -4,11 +4,11 @@ import { useGlobalContext } from './context.jsx'
 const Themes = () => {
   const { isDarkTheme, toggleTheme } = useGlobalContext()
   return (
-    <div>
-      <button onClick={toggleTheme}>
+    <section className="themes">
+      <button className="dark-toggle" onClick={toggleTheme}>
         {isDarkTheme ? <BsFillSunFill /> : <BsFillMoonFill />}
       </button>
-    </div>
+    </section>
   )
 }
 

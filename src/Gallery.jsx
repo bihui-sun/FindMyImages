@@ -37,13 +37,19 @@ const Gallery = () => {
       </section>
     )
   return (
-    <div>
-      <h1>Gallery</h1>
+    <section className="image-container">
       {images.map((image) => {
         const url = image?.urls?.small
-        return <img src={url} alt={image.alt_description} key={image.id} />
+        return (
+          <img
+            src={url}
+            alt={image.alt_description}
+            key={image.id}
+            className="img"
+          />
+        )
       })}
-    </div>
+    </section>
   )
 }
 export default Gallery
